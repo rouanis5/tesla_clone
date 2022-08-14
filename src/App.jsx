@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles/tailwind.css'
 
-const App = () => {
+function App() {
   return <div>App</div>
 }
 
