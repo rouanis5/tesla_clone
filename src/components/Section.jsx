@@ -4,14 +4,14 @@ import React from 'react'
 function Section({ img, title, description, leftBtnText, rightBtnText }) {
   return (
     <div
-      className="scale- flex min-h-screen flex-col justify-around overflow-hidden bg-cover bg-center text-center"
+      className="scale- flex min-h-screen flex-col justify-between overflow-hidden bg-cover bg-center text-center"
       style={{ backgroundImage: `url(${img})` }}
     >
-      <div>
+      <div className="pt-32">
         <h2 className="text-5xl capitalize text-black ">{title}</h2>
         <p className="text-lg capitalize">{description}</p>
       </div>
-      <div className="container mx-auto max-w-lg gap-5 space-y-5 px-5 sm:flex sm:space-y-0">
+      <div className="container mx-auto max-w-lg gap-5 space-y-5 px-5 pb-32 sm:flex sm:space-y-0">
         <Button text={leftBtnText} />
         {rightBtnText && <Button text={rightBtnText} isLight />}
       </div>
