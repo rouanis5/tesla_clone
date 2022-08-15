@@ -11,9 +11,9 @@ function Section({ img, title, description, leftBtnText, rightBtnText }) {
         <h2 className="text-5xl capitalize text-black ">{title}</h2>
         <p className="text-lg capitalize">{description}</p>
       </div>
-      <div className="container mx-auto grid max-w-lg grid-cols-1 justify-center gap-5 px-5 sm:grid-cols-2">
+      <div className="container mx-auto max-w-lg gap-5 space-y-5 px-5 sm:flex sm:space-y-0">
         <Button text={leftBtnText} />
-        {rightBtnText && <Button text={rightBtnText} isLight={true} />}
+        {rightBtnText && <Button text={rightBtnText} isLight />}
       </div>
     </div>
   )
@@ -25,7 +25,7 @@ function Button({ text, isLight }) {
   return (
     <button
       type="button"
-      className={`rounded-full py-2 px-5 text-sm uppercase shadow-lg transition-colors sm:py-3 ${
+      className={`mx-auto block w-full rounded-full py-2 px-5 text-sm uppercase shadow-lg transition-colors sm:inline sm:w-1/2 sm:py-3 ${
         isLight ? lightBtn : darkBtn
       }`}
     >
