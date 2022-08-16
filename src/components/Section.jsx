@@ -19,13 +19,13 @@ function Section({ img, title, description, leftBtnText, rightBtnText }) {
   )
 }
 
-const lightBtn = 'bg-white text-gray-700 hover:bg-gray-100'
-const darkBtn = 'bg-gray-700 text-white hover:bg-gray-800'
+const lightBtn = 'bg-white text-gray-700 hover:bg-gray-100 focus:ring-gray-100'
+const darkBtn = 'bg-gray-700 text-white hover:bg-gray-800 focus:ring-gray-800'
 function Button({ text, isLight }) {
   return (
     <button
       type="button"
-      className={`mx-auto block w-full rounded-full py-2 px-5 text-sm uppercase shadow-lg transition-colors sm:inline sm:w-1/2 sm:py-3 ${
+      className={`mx-auto block w-full rounded-full py-2 px-5 text-sm uppercase shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 sm:inline sm:w-1/2 sm:py-3 ${
         isLight ? lightBtn : darkBtn
       }`}
     >
