@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdExitToApp } from 'react-icons/md'
+import tw from 'tailwind-styled-components'
 
 const logo = new URL('../images/logo.svg', import.meta.url).href
 
@@ -31,7 +32,11 @@ function Navbar() {
         <div className="hidden xl:block">
           {links.map(
             ({ text, link, breakpoint }) =>
-              breakpoint === 'xl' && <Link key={text} text={text} link={link} />
+              breakpoint === 'xl' && (
+                <Link key={text} href={link}>
+                  {text}
+                </Link>
+              )
           )}
         </div>
         <div>
@@ -39,20 +44,19 @@ function Navbar() {
             {links.map(
               ({ text, link, breakpoint }) =>
                 breakpoint === 'sm' && (
-                  <Link key={text} text={text} link={link} />
+                  <Link key={text} href={link}>
+                    {text}
+                  </Link>
                 )
             )}
           </div>
-          <button
-            type="button"
-            className="relative inline-block rounded-xl px-4 py-2 capitalize before:absolute before:inset-0 before:-z-10 before:rounded-lg 
-            before:bg-white/30 before:shadow-lg before:backdrop-blur-sm before:transition-opacity hover:before:opacity-100 before:sm:opacity-0"
+          <Menu
             onClick={() => {
               setOpen(true)
             }}
           >
             menu
-          </button>
+          </Menu>
         </div>
       </div>
       <AnimatePresence>
@@ -80,24 +84,25 @@ function Navbar() {
               className="fixed top-0 right-0 bottom-0 flex w-72 
                 flex-col gap-3 overflow-y-auto bg-gray-200 px-8 py-5 shadow-lg"
             >
-              <button
+              <Exit
                 type="button"
-                className="sticky top-0 ml-auto rounded-full p-4 text-2xl before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-white before:opacity-0 before:shadow-lg before:transition-opacity hover:before:opacity-30 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
+                className=""
                 onClick={() => {
                   setOpen(false)
                 }}
               >
                 <MdExitToApp />
-              </button>
+              </Exit>
               {links.map(({ text, link }) => (
                 <Link
                   key={text}
-                  text={text}
-                  link={link}
+                  href={link}
                   onClick={() => {
                     setOpen(false)
                   }}
-                />
+                >
+                  {text}
+                </Link>
               ))}
             </motion.div>
           </>
@@ -107,18 +112,15 @@ function Navbar() {
   )
 }
 
-function Link({ text, link, onClick }) {
-  return (
-    <a
-      className="relative inline-block rounded-xl px-4 py-2 capitalize before:absolute before:inset-0 before:-z-10
-      before:rounded-lg before:bg-white/30 before:opacity-0 before:shadow-lg before:backdrop-blur-sm before:transition-opacity hover:before:opacity-100
-      focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
-      href={link}
-      onClick={onClick}
-    >
-      <span className="">{text}</span>
-    </a>
-  )
-}
+const Button = tw.a`
+relative inline-block rounded-xl px-4 py-2 capitalize
+before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-white/30 before:shadow-lg before:backdrop-blur-sm before:transition-opacity hover:before:opacity-100
+focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1
+focus:before:opacity-100
+`
+const Link = tw(Button)`before:opacity-0`
+const Menu = tw(Button)`before:sm:opacity-0`
+const Exit = tw(Link)`
+sticky top-0 ml-auto rounded-full before:rounded-full p-4 text-2xl cursor-pointer`
 
 export default Navbar
