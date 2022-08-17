@@ -1,18 +1,35 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useRef } from 'react'
 import tw from 'tailwind-styled-components'
+import { useInView } from 'framer-motion'
 
 function Section({ img, title, description, leftBtnText, rightBtnText }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { amount: 0.76 })
+
   return (
     <div
-      className="scale- flex min-h-screen flex-col justify-between overflow-hidden bg-cover bg-center text-center"
+      className="min-h-screen overflow-y-hidden bg-cover bg-center text-center"
       style={{ backgroundImage: `url(${img})` }}
+      ref={ref}
     >
-      <div className="pt-32">
+      <div
+        className="fixed top-0 left-1/2 mt-32 mb-16 -translate-x-1/2 transition-opacity delay-500 duration-700"
+        style={{
+          opacity: isInView ? 1 : 0,
+          transition: 'all 0.7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
+        }}
+      >
         <h2 className="text-5xl capitalize text-black ">{title}</h2>
         <p className="text-lg capitalize">{description}</p>
       </div>
-      <div className="container mx-auto max-w-lg gap-5 space-y-5 px-5 pb-32 sm:flex sm:space-y-0">
+      <div
+        className="container fixed bottom-0 left-1/2 mx-auto mt-16 mb-32 max-w-lg -translate-x-1/2 gap-5 space-y-5 px-5 transition-opacity delay-500  duration-700 sm:flex sm:space-y-0"
+        style={{
+          opacity: isInView ? 1 : 0,
+          transition: 'all 0.7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
+        }}
+      >
         <Button>{leftBtnText}</Button>
         {rightBtnText && <Button $isLight>{rightBtnText}</Button>}
       </div>
