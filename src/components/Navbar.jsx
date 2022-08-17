@@ -22,8 +22,8 @@ function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 right-0 left-0">
-      <div className="container mx-auto flex items-center justify-between px-5 pt-5">
+    <nav className="fixed top-0 right-0 left-0 z-10">
+      <div className="justify-between container mx-auto flex items-center px-5 pt-5">
         <div>
           <a href="/logo">
             <img src={logo} alt="tesla log" />
@@ -81,8 +81,8 @@ function Navbar() {
               transition={{
                 duration: 0.5,
               }}
-              className="fixed top-0 right-0 bottom-0 flex w-72 
-                flex-col gap-3 overflow-y-auto bg-gray-200 px-8 py-5 shadow-lg"
+              className="flex-col fixed top-0 right-0 bottom-0 flex 
+                w-72 gap-3 overflow-y-auto bg-gray-200 px-8 py-5 shadow-lg"
             >
               <Exit
                 type="button"
@@ -119,7 +119,7 @@ focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1
 focus:before:opacity-100
 `
 const Link = tw(Button)`before:opacity-0`
-const Menu = tw(Button)`before:sm:opacity-0`
+const Menu = tw(Button)`before:sm:opacity-0 cursor-pointer`
 const Exit = tw(Link)`
 sticky top-0 ml-auto rounded-full before:rounded-full p-4 text-2xl cursor-pointer`
 
