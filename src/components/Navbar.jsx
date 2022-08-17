@@ -23,12 +23,15 @@ function Navbar() {
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-10">
-      <div className="justify-between container mx-auto flex items-center px-5 pt-5">
-        <div>
+      <div className="container mx-auto flex items-center justify-between px-5 pt-5">
+        <motion.div
+          initial={{ scale: 0, x: -100, opacity: 0 }}
+          animate={{ scale: 1, x: 0, opacity: 1 }}
+        >
           <a href="/logo">
             <img src={logo} alt="tesla log" />
           </a>
-        </div>
+        </motion.div>
         <div className="hidden xl:block">
           {links.map(
             ({ text, link, breakpoint }) =>
@@ -81,8 +84,8 @@ function Navbar() {
               transition={{
                 duration: 0.5,
               }}
-              className="flex-col fixed top-0 right-0 bottom-0 flex 
-                w-72 gap-3 overflow-y-auto bg-gray-200 px-8 py-5 shadow-lg"
+              className="fixed top-0 right-0 bottom-0 flex w-72 
+                flex-col gap-3 overflow-y-auto bg-gray-200 px-8 py-5 shadow-lg"
             >
               <Exit
                 type="button"
