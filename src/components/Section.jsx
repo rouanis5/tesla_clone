@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { useRef } from 'react'
 import tw from 'tailwind-styled-components'
-import { useInView } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { FaChevronDown } from 'react-icons/fa'
 
-function Section({ img, title, description, leftBtnText, rightBtnText }) {
+function Section({
+  img,
+  title,
+  description,
+  leftBtnText,
+  rightBtnText,
+  readMore,
+}) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { amount: 0.76 })
+  const isInView = useInView(ref, { amount: 0.9 })
 
   return (
     <div
@@ -13,26 +21,35 @@ function Section({ img, title, description, leftBtnText, rightBtnText }) {
       style={{ backgroundImage: `url(${img})` }}
       ref={ref}
     >
-      <div
-        className="fixed top-0 left-1/2 mt-32 mb-16 -translate-x-1/2 transition-opacity delay-500 duration-700"
-        style={{
-          opacity: isInView ? 1 : 0,
-          transition: 'all 0.7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-        }}
-      >
-        <h2 className="text-5xl capitalize text-black ">{title}</h2>
-        <p className="text-lg capitalize">{description}</p>
-      </div>
-      <div
-        className="container fixed bottom-0 left-1/2 mx-auto mt-16 mb-32 max-w-lg -translate-x-1/2 gap-5 space-y-5 px-5 transition-opacity delay-500  duration-700 sm:flex sm:space-y-0"
-        style={{
-          opacity: isInView ? 1 : 0,
-          transition: 'all 0.7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s',
-        }}
-      >
-        <Button>{leftBtnText}</Button>
-        {rightBtnText && <Button $isLight>{rightBtnText}</Button>}
-      </div>
+      <AnimatePresence>
+        {isInView && (
+          <motion.div
+            className="fixed top-32 bottom-32 left-0 right-0 flex flex-col justify-between space-y-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div>
+              <h2 className="text-5xl capitalize text-black ">{title}</h2>
+              <p className="text-lg capitalize">{description}</p>
+            </div>
+            <div className="container mx-auto max-w-lg gap-5 space-y-5 px-5 sm:flex sm:space-y-0">
+              <Button>{leftBtnText}</Button>
+              {rightBtnText && <Button $isLight>{rightBtnText}</Button>}
+            </div>
+            {readMore && (
+              <motion.a
+                animate={{ translateY: 30 }}
+                transition={{ repeat: Infinity, duration: 1 }}
+                className="absolute left-1/2 -bottom-10 -translate-x-1/2"
+                href="/#"
+              >
+                <FaChevronDown />
+              </motion.a>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

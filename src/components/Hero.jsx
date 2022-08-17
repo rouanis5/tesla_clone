@@ -54,7 +54,7 @@ const sections = [
 function Hero() {
   return (
     <div>
-      {sections.map((el) => (
+      {sections.map((el, index) => (
         <Section
           key={el.title}
           img={el.img}
@@ -62,6 +62,7 @@ function Hero() {
           description={el.description}
           leftBtnText={el.leftBtn}
           rightBtnText={el.rightBtn}
+          readMore={index === 0}
         />
       ))}
     </div>
