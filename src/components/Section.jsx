@@ -33,20 +33,20 @@ function Section({
               <h2 className="text-5xl capitalize text-black ">{title}</h2>
               <p className="text-lg capitalize">{description}</p>
             </div>
-            <div className="container mx-auto max-w-lg gap-5 space-y-5 px-5 sm:flex sm:space-y-0">
-              <Button>{leftBtnText}</Button>
-              {rightBtnText && <Button $isLight>{rightBtnText}</Button>}
+            <div className="container mx-auto max-w-lg px-5">
+              <div className="gap-5 space-y-5 sm:flex sm:space-y-0">
+                <Button>{leftBtnText}</Button>
+                {rightBtnText && <Button $isLight>{rightBtnText}</Button>}
+              </div>
+              {readMore && (
+                <a
+                  className="fixed left-1/2 bottom-10 inline-block -translate-x-1/2"
+                  href="/#"
+                >
+                  <FaChevronDown className="inline-block animate-bounce" />
+                </a>
+              )}
             </div>
-            {readMore && (
-              <motion.a
-                animate={{ translateY: 30 }}
-                transition={{ repeat: Infinity, duration: 1 }}
-                className="absolute left-1/2 -bottom-10 -translate-x-1/2"
-                href="/#"
-              >
-                <FaChevronDown />
-              </motion.a>
-            )}
           </motion.div>
         )}
       </AnimatePresence>
