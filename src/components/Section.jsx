@@ -14,7 +14,7 @@ function Section({
   id,
 }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { amount: 0.9 })
+  const isInView = useInView(ref, { amount: 0.51, margin: '-10%' })
 
   return (
     <div
