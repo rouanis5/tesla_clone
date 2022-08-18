@@ -43,7 +43,7 @@ function Section({
               {readMore && (
                 <a
                   className="fixed left-1/2 bottom-10 inline-block -translate-x-1/2"
-                  href="/#"
+                  href={readMore}
                 >
                   <FaChevronDown className="inline-block animate-bounce" />
                 </a>

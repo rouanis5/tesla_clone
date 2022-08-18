@@ -19,7 +19,7 @@ function Navbar() {
           initial={{ scale: 0, x: -100, opacity: 0 }}
           animate={{ scale: 1, x: 0, opacity: 1 }}
         >
-          <a href="/logo">
+          <a href="#">
             <img src={logo} alt="tesla log" />
           </a>
         </motion.div>

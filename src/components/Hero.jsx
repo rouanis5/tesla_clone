@@ -17,7 +17,9 @@ function Hero() {
               description={el.data.description}
               leftBtnText={el.data.leftBtn}
               rightBtnText={el.data.rightBtn}
-              readMore={index === 0}
+              readMore={
+                index === 0 ? `#${sections[index + 1].id ?? ''}` : undefined
+              }
             />
           )
       )}
