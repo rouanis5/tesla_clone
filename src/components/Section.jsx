@@ -11,6 +11,7 @@ function Section({
   leftBtnText,
   rightBtnText,
   readMore,
+  id,
 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { amount: 0.9 })
@@ -20,6 +21,7 @@ function Section({
       className="min-h-screen overflow-y-hidden bg-cover bg-center text-center"
       style={{ backgroundImage: `url(${img})` }}
       ref={ref}
+      id={id}
     >
       <AnimatePresence>
         {isInView && (

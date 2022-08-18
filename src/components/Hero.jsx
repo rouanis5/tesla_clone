@@ -1,70 +1,26 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Section from './Section'
 
-const sections = [
-  {
-    img: new URL('../images/model-3.jpg', import.meta.url).href,
-    title: 'model 3',
-    description: 'order online for touchless delivery',
-    leftBtn: 'custom order',
-    rightBtn: 'existing inventory',
-  },
-  {
-    img: new URL('../images/model-y.jpg', import.meta.url).href,
-    title: 'model Y',
-    description: 'order online for touchless delivery',
-    leftBtn: 'custom order',
-    rightBtn: 'existing inventory',
-  },
-  {
-    img: new URL('../images/model-s.jpg', import.meta.url).href,
-    title: 'model S',
-    description: 'order online for touchless delivery',
-    leftBtn: 'custom order',
-    rightBtn: 'existing inventory',
-  },
-  {
-    img: new URL('../images/model-x.jpg', import.meta.url).href,
-    title: 'model X',
-    description: 'order online for touchless delivery',
-    leftBtn: 'custom order',
-    rightBtn: 'existing inventory',
-  },
-  {
-    img: new URL('../images/solar-panel.jpg', import.meta.url).href,
-    title: 'solar panels',
-    description: 'Lowest Cost Solar Panels in America',
-    leftBtn: 'order now',
-    rightBtn: 'learn more',
-  },
-  {
-    img: new URL('../images/solar-roof.jpg', import.meta.url).href,
-    title: 'solar roof',
-    description: 'Produce Clean Energy From Your Roof',
-    leftBtn: 'order now',
-    rightBtn: 'learn more',
-  },
-  {
-    img: new URL('../images/accessories.jpg', import.meta.url).href,
-    title: 'accessories',
-    leftBtn: 'shop now',
-  },
-]
-
 function Hero() {
+  const sections = useSelector((state) => state.section)
   return (
     <div>
-      {sections.map((el, index) => (
-        <Section
-          key={el.title}
-          img={el.img}
-          title={el.title}
-          description={el.description}
-          leftBtnText={el.leftBtn}
-          rightBtnText={el.rightBtn}
-          readMore={index === 0}
-        />
-      ))}
+      {sections.map(
+        (el, index) =>
+          el.data && (
+            <Section
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              img={el.data.img}
+              description={el.data.description}
+              leftBtnText={el.data.leftBtn}
+              rightBtnText={el.data.rightBtn}
+              readMore={index === 0}
+            />
+          )
+      )}
     </div>
   )
 }

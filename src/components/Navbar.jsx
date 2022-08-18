@@ -1,25 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdExitToApp } from 'react-icons/md'
 import tw from 'tailwind-styled-components'
 
 const logo = new URL('../images/logo.svg', import.meta.url).href
 
-const links = [
-  { breakpoint: 'xl', text: 'Model S', link: '/#' },
-  { breakpoint: 'xl', text: 'Model 3', link: '/#' },
-  { breakpoint: 'xl', text: 'Model X', link: '/#' },
-  { breakpoint: 'xl', text: 'Model Y', link: '/#' },
-  { breakpoint: 'xl', text: 'Solar roof', link: '/#' },
-  { breakpoint: 'xl', text: 'Solar panels', link: '/#' },
-  { breakpoint: 'sm', text: 'shop', link: '/#' },
-  { breakpoint: 'sm', text: 'account', link: '/#' },
-]
-
 function Navbar() {
   const [open, setOpen] = useState(false)
+  const sections = useSelector((state) => state.section)
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-10">
@@ -33,22 +24,24 @@ function Navbar() {
           </a>
         </motion.div>
         <div className="hidden xl:block">
-          {links.map(
-            ({ text, link, breakpoint }) =>
-              breakpoint === 'xl' && (
-                <Link key={text} href={link}>
-                  {text}
+          {/* get the links with a XL breakpoint */}
+          {sections.map(
+            ({ id, title, breakpoint }) =>
+              breakpoint.xl && (
+                <Link key={id} href={`#${id}`}>
+                  {title}
                 </Link>
               )
           )}
         </div>
         <div>
           <div className="hidden sm:inline-block">
-            {links.map(
-              ({ text, link, breakpoint }) =>
-                breakpoint === 'sm' && (
-                  <Link key={text} href={link}>
-                    {text}
+            {/* get the links with a SM breakpoint */}
+            {sections.map(
+              ({ id, title, breakpoint }) =>
+                breakpoint.sm && (
+                  <Link key={id} href={`#${id}`}>
+                    {title}
                   </Link>
                 )
             )}
@@ -96,15 +89,16 @@ function Navbar() {
               >
                 <MdExitToApp />
               </Exit>
-              {links.map(({ text, link }) => (
+              {/* get all links */}
+              {sections.map(({ id, title }) => (
                 <Link
-                  key={text}
-                  href={link}
+                  key={id}
+                  href={`#${id}`}
                   onClick={() => {
                     setOpen(false)
                   }}
                 >
-                  {text}
+                  {title}
                 </Link>
               ))}
             </motion.div>
